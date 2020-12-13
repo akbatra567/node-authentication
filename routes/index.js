@@ -2,13 +2,32 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuth, ensureGuest } = require('./../middleware/auth');
 const Story = require('./../models/Story');
-
+const Article = require('./../models/Article');
 
 // @desc Blog/Landing page
 // @route GET /
 router.get('/', (req, res) => {
     res.render('blog/index', {
         layout: 'blog',
+        title: 'Home'
+    });
+});
+
+// @desc Contact Page
+// @route GET /contact
+router.get('/contact', (req, res) => {
+    res.render('blog/contact', {
+        layout: 'blog',
+        title: 'Contact'
+    });
+});
+
+// @desc About page
+// @route GET /about
+router.get('/about', (req, res) => {
+    res.render('blog/about', {
+        layout: 'blog',
+        title: 'About Us'
     });
 });
 
@@ -18,6 +37,7 @@ router.get('/', (req, res) => {
 router.get('/login', ensureGuest, (req, res) => {
     res.render('login', {
         layout: 'login',
+        title: 'Login'
     });
 });
 
@@ -40,5 +60,18 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
     }
 });
 
+
+
+// @desc Read Post
+// // @route GET /
+// router.get('/:slug', async (req, res) => {
+//     const article = await Article.findOne({ slug: req.params.slug })
+//     if (article == null) res.redirect('/')
+//     res.render('articles/show', {
+//         layout: 'blog',
+//         article: article,
+//         title: article.title
+//     })
+// })
 
 module.exports = router;
