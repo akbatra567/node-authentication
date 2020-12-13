@@ -4,9 +4,18 @@ const { ensureAuth, ensureGuest } = require('./../middleware/auth');
 const Story = require('./../models/Story');
 
 
-// @desc Login/Landing page
+// @desc Blog/Landing page
 // @route GET /
-router.get('/', ensureGuest, (req, res) => {
+router.get('/', (req, res) => {
+    res.render('blog/index', {
+        layout: 'blog',
+    });
+});
+
+
+// @desc Login
+// @route GET /login
+router.get('/login', ensureGuest, (req, res) => {
     res.render('login', {
         layout: 'login',
     });
@@ -21,6 +30,7 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
         const stories = await Story.find({ user: req.user.id }).lean();
 
         res.render('dashboard', {
+            title: 'Dashboard',
             name: req.user.firstName,
             stories
         });
