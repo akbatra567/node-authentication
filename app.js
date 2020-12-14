@@ -79,8 +79,8 @@ app.use((request, response, next) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes 
-app.use(subdomain('learn', require('./routes/subdomain/learn')));
-app.use(subdomain('store', require('./routes/subdomain/store')));
+// app.use(subdomain('learn', require('./routes/subdomain/learn')));
+// app.use(subdomain('store', require('./routes/subdomain/store')));
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/stories', require('./routes/stories'));
